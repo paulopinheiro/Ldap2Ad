@@ -149,7 +149,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
             AdSearchService adService = new AdSearchService(usuario,senha);
             OpenLdapSearchService ldapService = new OpenLdapSearchService();
-
+            
             invocaFramePrincipal(adService,ldapService);
 
             this.dispose();

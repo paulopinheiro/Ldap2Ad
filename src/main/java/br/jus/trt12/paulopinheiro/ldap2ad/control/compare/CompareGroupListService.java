@@ -8,7 +8,7 @@ public interface CompareGroupListService {
      * Erros são detectados quando são encontrados:
      * - Grupos que existem no AD, mas não no LDAP
      * - Grupos no AD que possuem usuários que não existem no LDAP
-     * - Grupos no ad que possuem usuários que existem no LDAP, mas não são
+     * - Grupos no AD que possuem usuários que existem no LDAP, mas não são
      * membros.
      * @return Lista de mensagens de alerta geradas durante o processamento
      */

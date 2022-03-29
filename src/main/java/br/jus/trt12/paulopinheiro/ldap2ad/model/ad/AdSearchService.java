@@ -66,10 +66,13 @@ public class AdSearchService implements SearchService {
         if (att.get("description")!=null) descricao = (String) att.get("description").get();
         if (att.get("distinguishedname")!=null) dn = (String) att.get("distinguishedname").get();
 
-        String objectSid = Util.convertSidToStringSid((byte[]) att.get("objectSid").get());
-
-        Grupo g = new Grupo(sigla,descricao,dn);
-        this.getMapaGrupos().put(objectSid, g);
+        // Grupos contidos em "Users" e "Builtin" são padrão do Active Directory e não devem entrar na lista
+        // Infelizmente não é possível filtrar atributos do tipo DN no Active Directory
+        if (!dn.contains("CN=Users,DC=trt12,DC=jus,DC=br") && !dn.contains("CN=Builtin,DC=trt12,DC=jus,DC=br")) {
+            String objectSid = Util.convertSidToStringSid((byte[]) att.get("objectSid").get());
+            Grupo g = new Grupo(sigla,descricao,dn);
+            this.getMapaGrupos().put(objectSid, g);
+        }
     }
 
     private void buscarMembros() throws NamingException {
@@ -204,6 +207,6 @@ public class AdSearchService implements SearchService {
 
     @Override
     public List<Grupo> getAllGrupos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getListaGrupos();
     }
 }

@@ -27,7 +27,7 @@ public class Grupo implements Serializable, Comparable {
     }
 
     public String getPath() {
-        return getDn().replace("CN=","").replace("cn=","").replace(this.getSigla()+",", "").replace("gov", "jus");
+        return getDn().replace("CN=","").replace("cn=","").replace(this.getSigla()+",", "").replace("DC=gov", "DC=jus");
     }
 
     @Override
