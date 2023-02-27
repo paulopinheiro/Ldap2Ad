@@ -143,7 +143,7 @@ public class ComparaUsuarioFrame extends javax.swing.JFrame {
         jfcCriarScript.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         jfcCriarScript.setDialogTitle("Escolha o local e nome do arquivo");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atualizar Usuário no Active Directory");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

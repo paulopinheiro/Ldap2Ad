@@ -162,7 +162,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     private void invocaFramePrincipal(AdSearchService adService, OpenLdapSearchService ldapService) {
-            JFrame frame = new ComparaUsuarioFrame(adService,ldapService);
+            JFrame frame = new MainMenu(adService,ldapService);
             frame.setVisible(true);
             frame.pack();        
     }
