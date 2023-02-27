@@ -73,7 +73,7 @@ public class OpenLdapSearchService implements SearchService {
     }
 
     private List<Grupo> getOutrosGrupos(String uid, Grupo grupoPrimario) {
-        List<Grupo> resposta = new ArrayList<Grupo>();
+        List<Grupo> resposta = new ArrayList<>();
 
         SearchControls sc = new SearchControls();
         sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
@@ -155,7 +155,7 @@ public class OpenLdapSearchService implements SearchService {
     @Override
     public List<Usuario> getMembrosGrupo(Grupo g) {
         if (g==null||g.getSigla()==null||g.getSigla().isEmpty()) throw new InvalidParameterException("Informe um grupo válido");
-        List<Usuario> resposta = new ArrayList<Usuario>();
+        List<Usuario> resposta = new ArrayList<>();
 
         SearchControls sc = new SearchControls();
         sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
@@ -180,6 +180,7 @@ public class OpenLdapSearchService implements SearchService {
 
     @Override
     public List<Grupo> getAllGrupos() {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

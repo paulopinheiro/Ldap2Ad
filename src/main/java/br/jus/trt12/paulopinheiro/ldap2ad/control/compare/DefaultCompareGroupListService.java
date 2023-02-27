@@ -79,7 +79,7 @@ public class DefaultCompareGroupListService implements CompareGroupListService {
     @Override
     public List<String> getMensagensErro() {
         if (this.mensagensErro == null) {
-            this.mensagensErro = new ArrayList<String>();
+            this.mensagensErro = new ArrayList<>();
         }
         return this.mensagensErro;
     }
@@ -87,13 +87,13 @@ public class DefaultCompareGroupListService implements CompareGroupListService {
     @Override
     public List<String> getMensagensAlerta() {
         if (this.mensagensAlerta == null) {
-            this.mensagensAlerta = new ArrayList<String>();
+            this.mensagensAlerta = new ArrayList<>();
         }
         return this.mensagensAlerta;
     }
 
     private List<Grupo> getGruposLdap() {
-        return this.getGruposLdap();
+        return this.gruposLdap;
     }
 
     private List<Grupo> getGruposAd() {

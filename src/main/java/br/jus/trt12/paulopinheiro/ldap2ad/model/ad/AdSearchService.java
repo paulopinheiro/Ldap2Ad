@@ -46,7 +46,7 @@ public class AdSearchService implements SearchService {
         SearchControls sc = new SearchControls();
         sc.setSearchScope(SearchControls.SUBTREE_SCOPE);
         
-        String filtro = "(objectCategory=group)";
+        String filtro = "(&(objectCategory=Group)(!(isCriticalSystemObject=TRUE)))";
 
         NamingEnumeration<? extends SearchResult> cursor = ctx.getDirContext().search(BASE_DN, filtro, sc);
 
@@ -55,7 +55,7 @@ public class AdSearchService implements SearchService {
             Attributes att = result.getAttributes();
             processarGrupo(att);
         }
-        this.listaGrupos = new ArrayList<Grupo>(this.getMapaGrupos().values());
+        this.listaGrupos = new ArrayList<>(this.getMapaGrupos().values());
     }
 
     private void processarGrupo(Attributes att) throws NamingException {
@@ -112,7 +112,7 @@ public class AdSearchService implements SearchService {
         String sidGrupoPrimario = Util.getPrefixoAutoridades((byte[]) att.get("objectSid").get()) + "-" + (String) att.get("primarygroupid").get();
         Grupo primaryGroup = (Grupo) this.getMapaGrupos().get(sidGrupoPrimario);
 
-        List<Grupo> outrosGrupos = new ArrayList<Grupo>();
+        List<Grupo> outrosGrupos = new ArrayList<>();
         if (att.get("memberof")!=null) {
             List<String> listaDn = Util.parseListaString(att.get("memberof").getAll());
             outrosGrupos.addAll(parseOutrosGrupos(listaDn));
@@ -132,7 +132,7 @@ public class AdSearchService implements SearchService {
         // o campo "memberof", do AD só traz uma lista de DNs dos grupos
         // é necessário varrer a lista de grupos pra ver se a string contém
         // as DNs deles
-        List<Grupo> resposta = new ArrayList<Grupo>();
+        List<Grupo> resposta = new ArrayList<>();
 
         for (String dn:listaDn) {
             for (Grupo g:getListaGrupos()) {
@@ -169,29 +169,29 @@ public class AdSearchService implements SearchService {
     }
 
     private HashMap getMapaGrupos() {
-        if (this.mapaGrupos==null) this.mapaGrupos = new HashMap<String,Grupo>();
+        if (this.mapaGrupos==null) this.mapaGrupos = new HashMap<>();
         return this.mapaGrupos;
     }
 
     private List<Grupo> getListaGrupos() {
-        if (this.listaGrupos==null) this.listaGrupos = new ArrayList<Grupo>();
+        if (this.listaGrupos==null) this.listaGrupos = new ArrayList<>();
         return this.listaGrupos;
     }
 
     private List<Usuario> getListaUsuarios() {
-        if (this.listaUsuarios==null) this.listaUsuarios = new ArrayList<Usuario>();
+        if (this.listaUsuarios==null) this.listaUsuarios = new ArrayList<>();
         return this.listaUsuarios;
     }
 
     private HashMap<Grupo,List<Usuario>> getMembramentos() {
-        if (this.membramentos==null) this.membramentos = new HashMap<Grupo,List<Usuario>>();
+        if (this.membramentos==null) this.membramentos = new HashMap<>();
         return this.membramentos;
     }
 
     private void adicionaMembramento(Grupo grupo,Usuario membro) {
         List<Usuario> membros;
         membros = this.getMembramentos().get(grupo);
-        if (membros==null) membros = new ArrayList<Usuario>();
+        if (membros==null) membros = new ArrayList<>();
         membros.add(membro);
 
         this.getMembramentos().put(grupo, membros);
@@ -200,7 +200,7 @@ public class AdSearchService implements SearchService {
     @Override
     public List<Usuario> getMembrosGrupo(Grupo g) {
         List<Usuario> resposta = this.getMembramentos().get(g);
-        if (resposta==null) resposta = new ArrayList<Usuario>();
+        if (resposta==null) resposta = new ArrayList<>();
 
         return resposta;
     }
