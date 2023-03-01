@@ -64,7 +64,7 @@ public class Usuario implements Serializable, Comparable {
     }
 
     public List<Grupo> getTodosGrupos() {
-        List<Grupo> todos = new ArrayList<Grupo>();
+        List<Grupo> todos = new ArrayList<>();
         todos.add(getGrupoPrimario());
         todos.addAll(this.getOutrosGrupos());
 
@@ -90,10 +90,8 @@ public class Usuario implements Serializable, Comparable {
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.uid, other.uid)) {
-            return false;
-        }
-        return true;
+
+        return Objects.equals(this.uid, other.uid);
     }
 
     @Override

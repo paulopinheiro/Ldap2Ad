@@ -18,9 +18,9 @@ public class OpenLdapDirContext implements GeneralDirContext {
     private static final String CONNECTION_TYPE = "simple";  
     private static final String ADMIN_DN = "uid=consulta,dc=trt12,dc=gov,dc=br";
     private static final String ADMIN_PW = "consulta";
-    private final static String BASE_DN = "dc=trt12,dc=gov,dc=br";
-    private static final String MSG_ERROR_LDAP_CONNECTION = "Não foi possível obter um contexto LDAP";  
-    private static final String MSG_ERROR_LDAP_VALIDATION_USER = "Username ou Password Inválida";  
+    //private final static String BASE_DN = "dc=trt12,dc=gov,dc=br";
+    private static final String MSG_ERROR_LDAP_CONNECTION = "Não foi possível obter um contexto LDAP";
+    private static final String MSG_ERROR_LDAP_VALIDATION_USER = "Username ou Password Inválida";
 
     private static DirContext ctx;
 
@@ -45,15 +45,19 @@ public class OpenLdapDirContext implements GeneralDirContext {
         env.put(Context.SECURITY_PRINCIPAL, ADMIN_DN);  
         env.put(Context.SECURITY_CREDENTIALS, ADMIN_PW);  
         env.put(Context.SECURITY_AUTHENTICATION, CONNECTION_TYPE);
+
         Logger.getLogger(AdDirContext.class.getName()).log(Level.INFO, "Iniciando conexão com OpenLDAP...", "provideDirContext");
         try {  
             // Cria um Initial Context  
             dirCtx = new InitialDirContext(env);  
             Logger.getLogger(AdDirContext.class.getName()).log(Level.INFO, "Conexão com OpenLDAP aberta com sucesso", "provideDirContext");
+        } catch (javax.naming.AuthenticationException e) {
+            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, MSG_ERROR_LDAP_VALIDATION_USER, "provideDirContext");
+            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, e.getMessage(), "provideDirContext");
         } catch (NamingException e) {
-            System.out.println(MSG_ERROR_LDAP_CONNECTION);  
-            e.printStackTrace();  
-        }  
+            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, MSG_ERROR_LDAP_CONNECTION, "provideDirContext");
+            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, e.getMessage(), "provideDirContext");
+        }
         return dirCtx;
     }
 

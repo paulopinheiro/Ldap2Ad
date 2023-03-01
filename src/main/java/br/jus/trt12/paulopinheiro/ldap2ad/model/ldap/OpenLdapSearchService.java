@@ -50,7 +50,7 @@ public class OpenLdapSearchService implements SearchService {
             Logger.getLogger(OpenLdapSearchService.class.getName()).log(Level.WARNING, "Usuário " + uid + " não encontrado", ex);
         } finally {
             if (closeCtx) ctx.close();
-            return resposta;   
+            return resposta;
         }
     }
 

@@ -120,7 +120,7 @@ public class Util {
      * @return Lista de string correspondente ao cursor
      */
     public static List<String> parseListaString(NamingEnumeration<?> cursor) {
-        List<String> resposta = new ArrayList<String>();
+        List<String> resposta = new ArrayList<>();
         while (cursor.hasMoreElements()) {
             resposta.add((String) cursor.nextElement());
         }

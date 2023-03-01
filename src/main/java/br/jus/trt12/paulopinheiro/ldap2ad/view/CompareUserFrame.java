@@ -46,7 +46,7 @@ public class CompareUserFrame extends javax.swing.JFrame {
             if (compareService.getUsuario()==null) throw new InvalidParameterException("Usuário " + usuarioPesquisa + " não encontrado na pesquisa.");
 
             preencherCampos(compareService);
-            if ((compareService.getAcoesAutomatizaveis()!=null)&&(compareService.getAcoesAutomatizaveis().size()>0)) jbtGerarScript.setEnabled(true);
+            if ((compareService.getAcoesAutomatizaveis()!=null)&&(!compareService.getAcoesAutomatizaveis().isEmpty())) jbtGerarScript.setEnabled(true);
 
         } catch (InvalidParameterException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de pesquisa", JOptionPane.ERROR_MESSAGE);
@@ -89,7 +89,7 @@ public class CompareUserFrame extends javax.swing.JFrame {
             compareService.criarScript(arquivo);
             JOptionPane.showMessageDialog(this, "Arquivo gerado com sucesso", "Informação", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de criação de script", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CompareUserFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -350,15 +350,14 @@ public class CompareUserFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CompareUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CompareUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CompareUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CompareUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

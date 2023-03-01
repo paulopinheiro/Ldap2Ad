@@ -57,10 +57,8 @@ public class Grupo implements Serializable, Comparable {
             return false;
         }
         final Grupo other = (Grupo) obj;
-        if (!Objects.equals(this.sigla, other.sigla)) {
-            return false;
-        }
-        return true;
+
+        return Objects.equals(this.sigla, other.sigla);
     }
 
     @Override
