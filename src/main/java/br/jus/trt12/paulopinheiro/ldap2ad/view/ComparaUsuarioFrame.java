@@ -4,7 +4,7 @@ import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.CompareGroupListServic
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.CompareUserService;
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.DefaultCompareGroupListService;
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.DefaultCompareUserService;
-import br.jus.trt12.paulopinheiro.ldap2ad.control.search.SearchService;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
 import java.awt.Event;
 import java.io.File;

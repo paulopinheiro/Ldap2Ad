@@ -4,7 +4,7 @@
  */
 package br.jus.trt12.paulopinheiro.ldap2ad.view;
 
-import br.jus.trt12.paulopinheiro.ldap2ad.control.search.SearchService;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
 import javax.swing.JFrame;
 
 /**

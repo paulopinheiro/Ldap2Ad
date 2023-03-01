@@ -1,6 +1,6 @@
 package br.jus.trt12.paulopinheiro.ldap2ad.model.ldap;
 
-import br.jus.trt12.paulopinheiro.ldap2ad.control.search.SearchService;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Grupo;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
 import br.jus.trt12.paulopinheiro.ldap2ad.util.Util;
@@ -14,7 +14,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
-import br.jus.trt12.paulopinheiro.ldap2ad.control.search.GeneralDirContext;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.GeneralDirContext;
 
 public class OpenLdapSearchService implements SearchService {
     private static final String BASE_DN = "DC=trt12,DC=gov,DC=br";

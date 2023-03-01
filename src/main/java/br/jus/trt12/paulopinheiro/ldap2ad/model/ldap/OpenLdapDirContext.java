@@ -9,7 +9,7 @@ import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
-import br.jus.trt12.paulopinheiro.ldap2ad.control.search.GeneralDirContext;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.GeneralDirContext;
 
 @SuppressWarnings("rawtypes")
 public class OpenLdapDirContext implements GeneralDirContext {  

@@ -5,7 +5,7 @@
  */
 package br.jus.trt12.paulopinheiro.ldap2ad.view;
 
-import br.jus.trt12.paulopinheiro.ldap2ad.control.search.SearchService;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Grupo;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.ad.AdSearchService;
