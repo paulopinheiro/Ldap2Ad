@@ -24,11 +24,11 @@ import javax.swing.JOptionPane;
  *
  * @author 2360
  */
-public class MainFrame extends javax.swing.JFrame {
+public class CompareGroupListFrame extends javax.swing.JFrame {
     private AdSearchService adService;
     private OpenLdapSearchService ldapService;
 
-    public MainFrame() {
+    public CompareGroupListFrame() {
         initComponents();
         loginAD();
     }
@@ -44,7 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
             this.ldapService = new OpenLdapSearchService();
         } catch (InvalidParameterException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de conexão", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompareGroupListFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -417,20 +417,21 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompareGroupListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompareGroupListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompareGroupListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CompareGroupListFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new CompareGroupListFrame().setVisible(true);
             }
         });
     }
