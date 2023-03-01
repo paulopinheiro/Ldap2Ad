@@ -80,7 +80,7 @@ public class MainMenu extends javax.swing.JFrame {
     // E oferece sugestões de atualização, além de oferecer serviço de geração
     // de script em PowerShell para atualizar o AD.
     private void jmiComparaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComparaUsuarioActionPerformed
-        JFrame frame = new ComparaUsuarioFrame(adService,ldapService);
+        JFrame frame = new CompareUserFrame(adService,ldapService);
         frame.pack();
         frame.setVisible(true);
     }//GEN-LAST:event_jmiComparaUsuarioActionPerformed
