@@ -1,8 +1,6 @@
 package br.jus.trt12.paulopinheiro.ldap2ad.view;
 
-import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.CompareGroupListService;
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.CompareUserService;
-import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.DefaultCompareGroupListService;
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.DefaultCompareUserService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
@@ -34,10 +32,6 @@ public class ComparaUsuarioFrame extends javax.swing.JFrame {
     public ComparaUsuarioFrame(SearchService adService, SearchService ldapService) {
         this.adService = adService;
         this.ldapService = ldapService;
-
-//        CompareGroupListService cglService = new DefaultCompareGroupListService(ldapService, adService);
-//        for (String msgAlerta:cglService.getMensagensAlerta()) System.out.println(msgAlerta);
-//        for (String msgErro:cglService.getMensagensErro()) System.out.println(msgErro);
 
         initComponents();
         limparCampos();
