@@ -1,6 +1,5 @@
 package br.jus.trt12.paulopinheiro.ldap2ad.model.ldap;
 
-import br.jus.trt12.paulopinheiro.ldap2ad.model.ad.AdDirContext;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,17 +45,17 @@ public class OpenLdapDirContext implements GeneralDirContext {
         env.put(Context.SECURITY_CREDENTIALS, ADMIN_PW);  
         env.put(Context.SECURITY_AUTHENTICATION, CONNECTION_TYPE);
 
-        Logger.getLogger(AdDirContext.class.getName()).log(Level.INFO, "Iniciando conexão com OpenLDAP...", "provideDirContext");
+        Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.INFO, "Iniciando conexão com OpenLDAP...", "provideDirContext");
         try {  
             // Cria um Initial Context  
             dirCtx = new InitialDirContext(env);  
-            Logger.getLogger(AdDirContext.class.getName()).log(Level.INFO, "Conexão com OpenLDAP aberta com sucesso", "provideDirContext");
+            Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.INFO, "Conexão com OpenLDAP aberta com sucesso", "provideDirContext");
         } catch (javax.naming.AuthenticationException e) {
-            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, MSG_ERROR_LDAP_VALIDATION_USER, "provideDirContext");
-            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, e.getMessage(), "provideDirContext");
+            Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.SEVERE, MSG_ERROR_LDAP_VALIDATION_USER, "provideDirContext");
+            Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.SEVERE, e.getMessage(), "provideDirContext");
         } catch (NamingException e) {
-            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, MSG_ERROR_LDAP_CONNECTION, "provideDirContext");
-            Logger.getLogger(AdDirContext.class.getName()).log(Level.SEVERE, e.getMessage(), "provideDirContext");
+            Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.SEVERE, MSG_ERROR_LDAP_CONNECTION, "provideDirContext");
+            Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.SEVERE, e.getMessage(), "provideDirContext");
         }
         return dirCtx;
     }
@@ -67,7 +66,7 @@ public class OpenLdapDirContext implements GeneralDirContext {
             if (getDirContext() != null) {
                 getDirContext().close();
             }
-            Logger.getLogger(AdDirContext.class.getName()).log(Level.INFO, "Conexão com OpenLDAP fechada com sucesso", "fecharConexao");
+            Logger.getLogger(OpenLdapDirContext.class.getName()).log(Level.INFO, "Conexão com OpenLDAP fechada com sucesso", "fecharConexao");
         } catch (NamingException ex) {
             System.out.println("Erro ao fechar conexão com OpenLdap: " + ex.getExplanation());
         } finally {

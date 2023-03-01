@@ -1,6 +1,7 @@
 package br.jus.trt12.paulopinheiro.ldap2ad.control.compare;
 
 import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchServiceFactorySingleton;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.ad.ScriptsService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Grupo;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
@@ -37,9 +38,9 @@ public final class DefaultCompareUserService implements CompareUserService {
     private List<String> mensagensAlerta;
     private Map<String,String> acoesAutomatizaveis;
 
-    public DefaultCompareUserService(SearchService ldapService, SearchService adService) {
-        this.ldapService = ldapService;
-        this.adService = adService;
+    public DefaultCompareUserService() {
+        this.ldapService = SearchServiceFactorySingleton.getInstance().getOpenLdapSearchService();
+        this.adService = SearchServiceFactorySingleton.getInstance().getAdSearchService();
         inicializarDados();
     }
 

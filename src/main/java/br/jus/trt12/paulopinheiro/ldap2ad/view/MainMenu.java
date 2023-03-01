@@ -15,19 +15,10 @@ import javax.swing.JFrame;
  * 
  */
 public class MainMenu extends javax.swing.JFrame {
-    private SearchService adService;
-    private SearchService ldapService;
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
-        initComponents();
-    }
-
-    public MainMenu(SearchService adService, SearchService ldapService) {
-        this.adService = adService;
-        this.ldapService = ldapService;
-
         initComponents();
     }
 
@@ -80,7 +71,7 @@ public class MainMenu extends javax.swing.JFrame {
     // E oferece sugestões de atualização, além de oferecer serviço de geração
     // de script em PowerShell para atualizar o AD.
     private void jmiComparaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComparaUsuarioActionPerformed
-        JFrame frame = new CompareUserFrame(adService,ldapService);
+        JFrame frame = new CompareUserFrame();
         frame.pack();
         frame.setVisible(true);
     }//GEN-LAST:event_jmiComparaUsuarioActionPerformed

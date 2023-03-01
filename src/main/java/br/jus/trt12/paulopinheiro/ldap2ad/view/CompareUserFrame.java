@@ -2,7 +2,6 @@ package br.jus.trt12.paulopinheiro.ldap2ad.view;
 
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.CompareUserService;
 import br.jus.trt12.paulopinheiro.ldap2ad.control.compare.DefaultCompareUserService;
-import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchService;
 import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
 import java.awt.Event;
 import java.io.File;
@@ -21,19 +20,9 @@ import javax.swing.JOptionPane;
  * @author 2360
  */
 public class CompareUserFrame extends javax.swing.JFrame {
-    private SearchService adService;
-    private SearchService ldapService;
     private CompareUserService compareUserService;
 
     public CompareUserFrame() {
-        initComponents();
-        limparCampos();
-    }
-
-    public CompareUserFrame(SearchService adService, SearchService ldapService) {
-        this.adService = adService;
-        this.ldapService = ldapService;
-
         initComponents();
         limparCampos();
     }
@@ -109,7 +98,7 @@ public class CompareUserFrame extends javax.swing.JFrame {
     }
 
     private CompareUserService getCompareUserService() {
-        if (this.compareUserService==null) this.compareUserService = new DefaultCompareUserService(ldapService,adService);
+        if (this.compareUserService==null) this.compareUserService = new DefaultCompareUserService();
         return this.compareUserService;
     }
 

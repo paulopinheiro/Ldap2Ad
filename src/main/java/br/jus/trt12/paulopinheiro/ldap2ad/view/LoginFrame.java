@@ -5,8 +5,7 @@
  */
 package br.jus.trt12.paulopinheiro.ldap2ad.view;
 
-import br.jus.trt12.paulopinheiro.ldap2ad.model.ad.AdSearchService;
-import br.jus.trt12.paulopinheiro.ldap2ad.model.ldap.OpenLdapSearchService;
+import br.jus.trt12.paulopinheiro.ldap2ad.model.SearchServiceFactorySingleton;
 import java.awt.Event;
 import java.security.InvalidParameterException;
 import java.util.logging.Level;
@@ -146,11 +145,10 @@ public class LoginFrame extends javax.swing.JFrame {
         try {
             if ((usuario==null)||(usuario.trim().isEmpty())) throw new InvalidParameterException("Informe o usuário de login no Active Directory");
             if ((senha==null)||(senha.trim().isEmpty())) throw new InvalidParameterException("Informe a senha de login no Active Directory");
+            SearchServiceFactorySingleton searchServiceContextFactory = SearchServiceFactorySingleton.getInstance();
+            searchServiceContextFactory.setCredentials(usuario, senha);
 
-            AdSearchService adService = new AdSearchService(usuario,senha);
-            OpenLdapSearchService ldapService = new OpenLdapSearchService();
-            
-            invocaFramePrincipal(adService,ldapService);
+            invocaFramePrincipal();
 
             this.dispose();
         } catch (InvalidParameterException ex) {
@@ -161,8 +159,8 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }
 
-    private void invocaFramePrincipal(AdSearchService adService, OpenLdapSearchService ldapService) {
-            JFrame frame = new MainMenu(adService,ldapService);
+    private void invocaFramePrincipal() {
+            JFrame frame = new MainMenu();
             frame.setVisible(true);
             frame.pack();        
     }
