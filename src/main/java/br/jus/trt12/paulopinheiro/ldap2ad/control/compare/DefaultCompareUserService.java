@@ -37,21 +37,10 @@ public final class DefaultCompareUserService implements CompareUserService {
     private List<String> mensagensAlerta;
     private Map<String,String> acoesAutomatizaveis;
 
-    private DefaultCompareUserService(SearchService ldapService, SearchService adService) {
+    public DefaultCompareUserService(SearchService ldapService, SearchService adService) {
         this.ldapService = ldapService;
         this.adService = adService;
         inicializarDados();
-    }
-
-    /**
-     * Inicializa o serviço de comparação
-     * @param ldapService Serviço de busca do OpenLDAP
-     * @param adService Serviço de busca do ActiveDirectory
-     * @param nomeUsuario Usuário sendo pesquisado
-     */
-    public DefaultCompareUserService(SearchService ldapService, SearchService adService, String nomeUsuario) {
-        this(ldapService,adService);
-        compararUsuario(nomeUsuario);
     }
 
     /**

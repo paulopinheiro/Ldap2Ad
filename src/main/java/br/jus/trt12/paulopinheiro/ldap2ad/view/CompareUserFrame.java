@@ -23,10 +23,11 @@ import javax.swing.JOptionPane;
 public class CompareUserFrame extends javax.swing.JFrame {
     private SearchService adService;
     private SearchService ldapService;
-    private CompareUserService compareService;
+    private CompareUserService compareUserService;
 
     public CompareUserFrame() {
         initComponents();
+        limparCampos();
     }
 
     public CompareUserFrame(SearchService adService, SearchService ldapService) {
@@ -41,12 +42,12 @@ public class CompareUserFrame extends javax.swing.JFrame {
         limparCampos();
         try {
             if ((usuarioPesquisa==null)||(usuarioPesquisa.trim().isEmpty())) throw new InvalidParameterException("Informe o nome/matrícula do usuário a ser pesquisado");
-            
-            compareService = new DefaultCompareUserService(ldapService,adService,usuarioPesquisa);
-            if (compareService.getUsuario()==null) throw new InvalidParameterException("Usuário " + usuarioPesquisa + " não encontrado na pesquisa.");
 
-            preencherCampos(compareService);
-            if ((compareService.getAcoesAutomatizaveis()!=null)&&(!compareService.getAcoesAutomatizaveis().isEmpty())) jbtGerarScript.setEnabled(true);
+            this.getCompareUserService().compararUsuario(usuarioPesquisa);
+            if (this.getCompareUserService().getUsuario()==null) throw new InvalidParameterException("Usuário " + usuarioPesquisa + " não encontrado na pesquisa.");
+
+            preencherCampos();
+            if ((this.getCompareUserService().getAcoesAutomatizaveis()!=null)&&(!this.getCompareUserService().getAcoesAutomatizaveis().isEmpty())) jbtGerarScript.setEnabled(true);
 
         } catch (InvalidParameterException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro de pesquisa", JOptionPane.ERROR_MESSAGE);
@@ -56,10 +57,10 @@ public class CompareUserFrame extends javax.swing.JFrame {
         }
     }
 
-    private void preencherCampos(CompareUserService compareService) {
-        preencherDadosUsuario(compareService.getUsuario());
-        preencherListaProvidencias(compareService.getMensagensAlerta());
-        preencherListaComandos(new ArrayList(compareService.getAcoesAutomatizaveis().keySet()));
+    private void preencherCampos() {
+        preencherDadosUsuario(this.getCompareUserService().getUsuario());
+        preencherListaProvidencias(this.getCompareUserService().getMensagensAlerta());
+        preencherListaComandos(new ArrayList(this.getCompareUserService().getAcoesAutomatizaveis().keySet()));
     }
 
     private void preencherDadosUsuario(Usuario usuario) {
@@ -84,9 +85,9 @@ public class CompareUserFrame extends javax.swing.JFrame {
         this.jlstComandos.setModel(modeloComandos);
     }
 
-    private void gerarScript(CompareUserService compareService, File arquivo) {
+    private void gerarScript(File arquivo) {
         try {
-            compareService.criarScript(arquivo);
+            this.getCompareUserService().criarScript(arquivo);
             JOptionPane.showMessageDialog(this, "Arquivo gerado com sucesso", "Informação", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -105,6 +106,11 @@ public class CompareUserFrame extends javax.swing.JFrame {
         this.jlstProvidencias.setModel(new DefaultListModel());
         this.jlstComandos.setModel(new DefaultListModel());
         this.jbtGerarScript.setEnabled(false);
+    }
+
+    private CompareUserService getCompareUserService() {
+        if (this.compareUserService==null) this.compareUserService = new DefaultCompareUserService(ldapService,adService);
+        return this.compareUserService;
     }
 
     /**
@@ -324,7 +330,7 @@ public class CompareUserFrame extends javax.swing.JFrame {
 
     private void jbtGerarScriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtGerarScriptActionPerformed
         if (jfcCriarScript.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
-            this.gerarScript(compareService, jfcCriarScript.getSelectedFile());
+            this.gerarScript(jfcCriarScript.getSelectedFile());
         }
     }//GEN-LAST:event_jbtGerarScriptActionPerformed
 
