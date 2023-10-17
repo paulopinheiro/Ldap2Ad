@@ -6,33 +6,43 @@ import br.jus.trt12.paulopinheiro.ldap2ad.model.beans.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+    /**
+    - Faz a comparação entre as listas de grupos do LDAP e do AD
+    - Preenche listas de erros e alertas a respeito das diferenças,
+    * disponibilizando-as como métodos públicos
+    */
 public class DefaultCompareGroupListService implements CompareGroupListService {
-
     private final SearchService ldapService;
     private final SearchService adService;
-    private final List<Grupo> gruposLdap;
-    private final List<Grupo> gruposAd;
-
     private List<String> mensagensErro;
     private List<String> mensagensAlerta;
 
+    /**
+    Injeta os serviços de busca de LDAP e AD recebendo como parâmetros no
+     * construtor e dispara o processo de comparação.
+     * @param ldapService SearchService do LDAP já inicializado
+     * @param adService SearchService do AD já inicializado
+    */
     public DefaultCompareGroupListService(SearchService ldapService, SearchService adService) {
-        this.adService = adService;
+        //Atributos imutáveis só podem ser iniciados no construtor.
         this.ldapService = ldapService;
-        this.gruposAd = this.getAdService().getAllGrupos();
-        this.gruposLdap = this.getLdapService().getAllGrupos();
-        inicializarListas();
+        this.adService = adService;
+
         compararListasGrupos();
+    }
+    /*
+    Preenche listas de erros/alertas (quando aplicáveis) partindo separadamente
+    da iteração das listas de grupos do LDAP e do AD.
+    */
+    private void compararListasGrupos() {
+        inicializarListas();
+        for (Grupo g : this.getGruposLdap()) comparaGrupoLdapComAd(g);
+        for (Grupo g : this.getGruposAd()) comparaGrupoAdComLdap(g);
     }
 
     private void inicializarListas() {
         this.mensagensAlerta = null;
         this.mensagensErro = null;
-    }
-
-    private void compararListasGrupos() {
-        for (Grupo g : this.getGruposLdap()) comparaGrupoLdapComAd(g);
-        for (Grupo g : this.getGruposAd()) comparaGrupoAdComLdap(g);
     }
 
     private void comparaGrupoLdapComAd(Grupo g) {
@@ -92,12 +102,18 @@ public class DefaultCompareGroupListService implements CompareGroupListService {
         return this.mensagensAlerta;
     }
 
+    /*
+    * Evita repetição de código e facilita legibilidade
+    */
     private List<Grupo> getGruposLdap() {
-        return this.gruposLdap;
+        return this.getLdapService().getAllGrupos();
     }
 
+    /*
+    * Evita repetição de código e facilita legibilidade
+    */
     private List<Grupo> getGruposAd() {
-        return this.gruposAd;
+        return this.getAdService().getAllGrupos();
     }
 
     /**
